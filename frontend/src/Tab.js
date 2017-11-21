@@ -5,25 +5,6 @@ export default class Tab extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      hover: false
-    }
-  }
-
-  mouseEnter() {
-    if(this.props.active) return;
-    
-    this.setState({
-      hover: true
-    });
-  }
-
-  mouseLeave() {
-    if(this.props.active) return;
-    
-    this.setState({
-      hover: false
-    });
   }
 
   render() {
@@ -31,13 +12,18 @@ export default class Tab extends Component {
     let className;
     let containerClassName = 'tab-container';
 
-    if(this.state.hover) className = 'tab-hover';
-    else if(this.props.active) className = 'tab-active';
+    if(this.props.active) className = 'tab-active';
     else className = 'tab';
 
     return (
-      <div className={ containerClassName } >
-        <div className={ className } style={ this.props.center ? { justifyContent: 'center' } : null } onMouseEnter={ () => this.mouseEnter() } onMouseLeave={ () => this.mouseLeave() } >
+      <div className={ containerClassName } onClick={ () => { 
+        window.scrollTo(0, 0);
+        this.props.onClick();
+        this.setState({
+          hover: false
+        });
+      }} >
+        <div className={ className } style={ this.props.center ? { justifyContent: 'center' } : null } >
             <img src={ this.props.icon } style={{ width: this.props.width, height: this.props.height, margin: 8 }} />
             <div className="tab-text" >{ this.props.text }</div>
         </div>

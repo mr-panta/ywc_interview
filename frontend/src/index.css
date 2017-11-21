@@ -1,7 +1,7 @@
 body {
   background-image: url('./image/background.jpg');
-  background-color: rgb(65, 50, 30);
-  background-attachment: scroll;
+  background-color: black;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -10,7 +10,6 @@ body {
   
   color: white;
   font-family: 'Kanit', sans-serif;
-  overflow: hidden;
 }
 
 .container {
@@ -23,6 +22,11 @@ body {
 
 .menu {
   width: 256px;
+  position: fixed;
+}
+
+.menu-container {
+  width: 256px;
 }
 
 .content {
@@ -31,13 +35,12 @@ body {
   flex: 1;
 
   margin-left: 16px;
-  border-radius: 8px;
+  margin-bottom: 32px;
+  border-radius: 16px;
   border-width: 3px;
   border-color: white;
   border-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  padding: 32px;
 }
 
 .tab-container {
@@ -56,23 +59,30 @@ body {
   height: 72px;
   margin: 8px;
   margin-top: 0px;
-  border-radius: 8px;
+  border-radius: 16px;
   border-width: 3px;
   border-color: white;
   border-style: solid;
   cursor: pointer;
 }
 
-.tab-hover {
+.tab:hover {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
   align-items: center;
-  width: 248px;
+  /*width: 248px;
   height: 80px;
   margin-left: 4px;
-  border-radius: 8px;
+  border-radius: 16px;*/
+  width: 240px;
+  height: 72px;
+  margin: 8px;
+  margin-top: 0px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+
   border-width: 3px;
   border-color: white;
   border-style: solid;
@@ -89,7 +99,7 @@ body {
   height: 72px;
   margin: 8px;
   margin-top: 0px;
-  border-radius: 8px;
+  border-radius: 16px;
   border-width: 3px;
   border-color: white;
   border-style: solid;
@@ -98,4 +108,69 @@ body {
 
 .tab-text {
   font-size: 20px;
+}
+
+.content-title {
+  font-size: 32px;
+  flex: 1;
+  -webkil-flex: 1;
+}
+
+.list-container {
+  overflow: auto;
+}
+
+.content-header {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+.button {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.button:hover {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-width: 0px;
+  border-color: white;
+  border-radius: 24px;
+  font-size: 16px;
+  color: white;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 152px;
+}
+
+input::-webkit-input-placeholder {
+color: rgba(255, 255, 255, 0.5) !important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: rgba(255, 255, 255, 0.5) !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: rgba(255, 255, 255, 0.5) !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: rgba(255, 255, 255, 0.5) !important;  
 }
