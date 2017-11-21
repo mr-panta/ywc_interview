@@ -2,12 +2,23 @@ import React, { Component } from 'react';
 
 export default class UserList extends Component {
 
+  count = 0;
+
   constructor(props) {
     super(props);
 
     this.state = {
-      keyword: ''
+      keyword: '',
+      count: 0,
     };
+
+    setInterval(() => {
+      if(this.count != this.state.count) {
+        this.setState({
+          count: this.count
+        });
+      }
+    });
 
   }
 
@@ -47,11 +58,16 @@ export default class UserList extends Component {
         if(filteredUser.similarity >= 0.65) filteredUsers.push(filteredUser);
       }
 
+      this.count = filteredUsers.length
+
       return filteredUsers.sort((A, B) => {
         return A.similarity < B.similarity;
       });
     }
-    else return users;
+    else {
+      this.count = users.length;
+      return users;
+    }
   }
 
   render() {
@@ -59,10 +75,10 @@ export default class UserList extends Component {
     return (
       <div >
         <div className="content-header" >
-          <div className="content-title" >{ this.props.title }</div>
+          <div className="content-title" >{ this.props.title } - { this.state.count } คน</div>
           <input type="text" placeholder="ค้นหา" value={ this.state.keyword } onChange={evt => this.updateInputValue(evt) } />
           <div className="button" >
-            <i className="fa fa-search" style={{ marginTop: 16 }} />
+            <i className="fa fa-facebook" style={{ marginTop: 16, fontSize: 20 }} />
           </div>
         </div>
         <hr />
