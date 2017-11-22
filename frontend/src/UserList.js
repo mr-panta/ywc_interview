@@ -2,81 +2,13 @@ import React, { Component } from 'react';
 
 export default class UserList extends Component {
 
-  count = 0;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      keyword: '',
-      count: 0,
-    };
-
-    setInterval(() => {
-      if(this.count != this.state.count) {
-        this.setState({
-          count: this.count
-        });
-      }
-    });
-
-  }
-
-  updateInputValue = function(evt) {
-    this.setState({
-      keyword: evt.target.value
-    });
-  }
-
-  similar = (keyword, word) => {
-    let dp = [];
-
-    for(let i = 0; i <= keyword.length; i++) {
-      dp.push([]);
-      for(let j = 0; j <= word.length; j++) {
-        if(i == 0 || j == 0) {
-          dp[i].push(0);
-          continue;
-        }
-        
-        if(keyword[i-1] == word[j-1]) dp[i].push(dp[i-1][j-1] + 1);
-        else if(dp[i-1][j] > dp[i][j-1]) dp[i].push(dp[i-1][j]);
-        else dp[i].push(dp[i][j-1]);
-      }
-    }
-
-    return dp[keyword.length][word.length] / keyword.length;
-  }
-
-  filterUser = function(users) {
-    if(this.state.keyword != '') {
-      let filteredUsers = [];
-      
-      for(let i = 0; i < users.length; i++) {  
-        let filteredUser = users[i];
-        filteredUser.similarity = this.similar(this.state.keyword, users[i].firstName + ' ' + users[i].lastName);
-        if(filteredUser.similarity >= 0.65) filteredUsers.push(filteredUser);
-      }
-
-      this.count = filteredUsers.length
-
-      return filteredUsers.sort((A, B) => {
-        return A.similarity < B.similarity;
-      });
-    }
-    else {
-      this.count = users.length;
-      return users;
-    }
-  }
-
   render() {
 
     return (
       <div >
         <div className="content-header" >
-          <div className="content-title" >{ this.props.title } - { this.state.count } คน</div>
-          <input type="text" placeholder="ค้นหา" value={ this.state.keyword } onChange={evt => this.updateInputValue(evt) } />
+          <div className="content-title" >{ this.props.title } - { this.props.users.length } คน</div>
+          <input type="text" placeholder="ค้นหา" value={ this.props.keyword } onChange={ this.props.onChange } />
           <div className="button" >
             <i className="fa fa-facebook" style={{ marginTop: 16, fontSize: 20 }} />
           </div>
@@ -86,15 +18,21 @@ export default class UserList extends Component {
           <table style={{ width: '100%' }} >
             <thead>
               <tr>
-                <td style={{ width: 88, fontSize: 20 }} >#</td>
-                <td style={{ fontSize: 20 }} >ชื่อ-สกุล</td>
-                <td style={{ width: 152, fontSize: 20 }} >สาขา</td>
+                <td style={{ width: 88, fontSize: 20 }} >
+                  <span onClick={ () => this.props.changeSortBy('interviewRef') } className="table-header" >#</span>
+                </td>
+                <td style={{ fontSize: 20 }} >
+                  <span onClick={ () => this.props.changeSortBy('name') } className="table-header" >ชื่อ-สกุล</span>
+                </td>
+                <td style={{ width: 152, fontSize: 20 }} >
+                  <span onClick={ () => this.props.changeSortBy('major') } className="table-header" >สาขา</span>
+                </td>
               </tr>
             </thead>
 
             <tbody>
               {
-                this.filterUser(this.props.users).map((user, index) => {
+                this.props.users.map((user, index) => {
                   return (
                     <tr key={ index } >
                       <td style={{ width: 88 }} >{ user.interviewRef } </td>

@@ -21,6 +21,9 @@ export default class App extends Component {
       users: [],
       activeTab: 'main',
       contentTitle: 'ผู้ผ่านเข้ารอบทั้งหมด',
+      keyword: '',
+      sortBy: 'interviewRef',
+      sortDirection: true,
     };
 
     let that = this;
@@ -49,7 +52,7 @@ export default class App extends Component {
     this.changeTab = this.changeTab.bind(this);
   }
 
-  changeTab(tab) {
+  changeTab = (tab) => {
 
     let users = this.users;
     let contentTitle = 'ผู้ผ่านเข้ารอบทั้งหมด';
@@ -62,7 +65,110 @@ export default class App extends Component {
       users: users,
       activeTab: tab,
       contentTitle: contentTitle,
+      sortBy: 'interviewRef',
+      sortDirection: true,
     });
+  }
+
+  updateInputValue(evt) {
+    if(evt.target.value.length != 0) {
+      this.setState({
+        keyword: evt.target.value,
+        sortBy: 'similarity',
+      });
+    }
+    else {
+      this.setState({
+        keyword: evt.target.value,
+        sortBy: 'interviewRef',
+        sortDirection: true,
+      });
+    }
+  }
+
+  similar = (keyword, word) => {
+    let dp = [];
+
+    for(let i = 0; i <= keyword.length; i++) {
+      dp.push([]);
+      for(let j = 0; j <= word.length; j++) {
+        if(i == 0 || j == 0) {
+          dp[i].push(0);
+          continue;
+        }
+        
+        if(keyword[i-1] == word[j-1]) dp[i].push(dp[i-1][j-1] + 1);
+        else if(dp[i-1][j] > dp[i][j-1]) dp[i].push(dp[i-1][j]);
+        else dp[i].push(dp[i][j-1]);
+      }
+    }
+
+    return dp[keyword.length][word.length] / keyword.length;
+  }
+
+  filterUser = (users) => {
+    if(this.state.keyword.length != 0) {
+      let filteredUsers = [];
+      
+      for(let i = 0; i < users.length; i++) {  
+        let filteredUser = users[i];
+
+        if(this.state.keyword.length <= users[i].firstName.length || this.state.keyword.length <= users[i].lastName.length) {
+          let firstSim = this.similar(this.state.keyword, users[i].firstName);
+          let lastSim = this.similar(this.state.keyword, users[i].lastName);
+          filteredUser.similarity = firstSim > lastSim ? firstSim : lastSim;
+        }
+        else filteredUser.similarity = this.similar(this.state.keyword, users[i].firstName + ' ' + users[i].firstName);
+
+        if(filteredUser.similarity >= 0.7) filteredUsers.push(filteredUser);
+      }
+
+      if(this.state.sortBy == 'interviewRef') {
+        if(this.state.sortDirection) return filteredUsers.sort((A, B) => A.interviewRef.localeCompare(B.interviewRef));
+        else return filteredUsers.sort((B, A) => A.interviewRef.localeCompare(B.interviewRef));
+      }
+      else if(this.state.sortBy == 'name') {
+        if(this.state.sortDirection) return filteredUsers.sort((A, B) => (A.firstName + A.lastName).localeCompare((B.firstName + B.lastName)));
+        else return filteredUsers.sort((B, A) => (A.firstName + A.lastName).localeCompare((B.firstName + B.lastName)));
+      }
+      else if(this.state.sortBy == 'major') {
+        if(this.state.sortDirection) return filteredUsers.sort((A, B) => A.major.localeCompare(B.major));
+        else return filteredUsers.sort((B, A) => A.major.localeCompare(B.major));
+      }
+      else return filteredUsers.sort((A, B) => A.similarity < B.similarity);
+    }
+    else {
+      
+      if(this.state.sortBy == 'interviewRef') {
+        if(this.state.sortDirection) return users.sort((A, B) => A.interviewRef.localeCompare(B.interviewRef));
+        else return users.sort((B, A) => A.interviewRef.localeCompare(B.interviewRef));
+      }
+      else if(this.state.sortBy == 'name') {
+        if(this.state.sortDirection) return users.sort((A, B) => (A.firstName + A.lastName).localeCompare((B.firstName + B.lastName)));
+        else return users.sort((B, A) => (A.firstName + A.lastName).localeCompare((B.firstName + B.lastName)));
+      }
+      else if(this.state.sortBy == 'major') {
+        if(this.state.sortDirection) return users.sort((A, B) => A.major.localeCompare(B.major));
+        else return users.sort((B, A) => A.major.localeCompare(B.major));
+      }
+      else return users;
+
+    }
+  }
+
+  changeSortBy = (sortBy) => {
+    if(this.state.sortBy != sortBy) {
+      this.setState({
+        sortBy: sortBy,
+        sortDirection: true
+      });
+    }
+    else {
+      this.setState({
+        sortBy: sortBy,
+        sortDirection: !this.state.sortDirection
+      });
+    }
   }
 
   render() {
@@ -78,7 +184,7 @@ export default class App extends Component {
           </div>
         </div>
         <div className="content" >
-          <UserList users={ this.state.users } title={ this.state.contentTitle } height={ this.state.height } />
+          <UserList users={ this.filterUser(this.state.users) } title={ this.state.contentTitle } height={ this.state.height } onChange={ evt => this.updateInputValue(evt) } changeSortBy={ this.changeSortBy } />
         </div>
       </div>
     );
