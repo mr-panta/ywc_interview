@@ -135,7 +135,8 @@ export default class App extends Component {
 
           let users = [];
           for(let i = 0; i < that.users.length; i++) {
-            let filteredUser = that.users[i];
+            let filteredUser = {};
+            Object.assign(filteredUser, that.users[i]);
             filteredUser.similarity = that.similar(that.state.thaiName, filteredUser.firstName + ' ' + filteredUser.lastName);
             users.push(filteredUser);
           }
@@ -149,19 +150,21 @@ export default class App extends Component {
 
         let friends = [];
         that.state.friends.map((user) => {
-          let newUser = user;
-          newUser.simUser = null;
+          let newUser = {};
+          Object.assign(newUser, user);
+          newUser.simUser = {};
 
           graph.get(newUser.id, function(err2, res2) {
             newUser.thaiName = that.getThaiName(newUser.name, res2.name);
             newUser.englishName = that.getEnglishName(newUser.name, res2.name);
             if(newUser.thaiName !== '') {
-              newUser.simUser = that.users[0];
+              Object.assign(newUser.simUser, that.users[0]);
               newUser.simUser.similarity = that.similar(newUser.thaiName, newUser.simUser.firstName + ' ' + newUser.simUser.lastName);
               for(let i = 1; i < that.users.length; i++) {
                 let sim = that.similar(newUser.thaiName, that.users[i].firstName + ' ' + that.users[i].lastName);
                 if(sim > newUser.simUser.similarity) {
-                  newUser.simUser = that.users[i];
+                  newUser.simUser = {};
+                  Object.assign(newUser.simUser, that.users[i]);
                   newUser.simUser.similarity = sim;
                 }
               }
@@ -400,5 +403,5 @@ export default class App extends Component {
     if(B[0] < 'z') return B;
 
     return '';
-  }
+  } 
 }
