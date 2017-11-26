@@ -19,7 +19,7 @@ export default class Tab extends Component {
         });
       }} >
         <div className={ className } style={ this.props.center ? { justifyContent: 'center' } : null } >
-            <img alt="" src={ this.props.icon } style={{ width: this.props.width, height: this.props.height, margin: 8 }} />
+            { this.props.icon && <img alt="" src={ this.props.icon } style={{ width: this.props.width, height: this.props.height, margin: 8 }} /> }
             <div className="tab-text" >{ this.props.text }</div>
         </div>
       </div>
