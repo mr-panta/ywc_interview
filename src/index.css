@@ -1,0 +1,295 @@
+body {
+  background-image: url('./image/background.jpg');
+  background-color: black;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  
+  color: white;
+  font-family: 'Kanit', sans-serif;
+}
+
+.container {
+  width: 1000px;
+  padding-top: 32px;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  margin: 0 auto;
+}
+
+.menu {
+  width: 256px;
+  position: fixed;
+}
+
+.menu-container {
+  width: 256px;
+}
+
+.content {
+  -webkit-flex: 1;  /* Safari 6.1+ */
+  -ms-flex: 1;  /* IE 10 */    
+  flex: 1;
+
+  margin-left: 16px;
+  margin-bottom: 32px;
+  border-radius: 16px;
+  border-width: 3px;
+  border-color: white;
+  border-style: solid;
+  padding: 32px;
+}
+
+.tab-container {
+  width: 248px;
+  height: 80px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+  width: 240px;
+  height: 72px;
+  margin: 8px;
+  margin-top: 0px;
+  border-radius: 16px;
+  border-width: 3px;
+  border-color: white;
+  border-style: solid;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.tab:hover {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+  /*width: 248px;
+  height: 80px;
+  margin-left: 4px;
+  border-radius: 16px;*/
+  width: 240px;
+  height: 72px;
+  margin: 8px;
+  margin-top: 0px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+
+  border-width: 3px;
+  border-color: white;
+  border-style: solid;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.tab-active {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+  width: 240px;
+  height: 72px;
+  margin: 8px;
+  margin-top: 0px;
+  border-radius: 16px;
+  border-width: 3px;
+  border-color: white;
+  border-style: solid;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.tab-text {
+  font-size: 20px;
+}
+
+.content-title {
+  font-size: 30px;
+  flex: 1;
+  -webkil-flex: 1;
+}
+
+.list-container {
+  overflow: auto;
+}
+
+.content-header {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+.button {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.button:hover {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.table-header {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.table-header:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.link, a {
+  color: rgb(53, 81, 155);
+  cursor: pointer;
+  text-decoration: inherit;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.link:hover, a:hover {
+  color: rgb(53, 81, 155);
+  cursor: pointer;
+  text-decoration: underline;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+.popup-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.popup-content {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -300px;
+  border-radius: 10px;
+  background-color: rgb(246, 247, 248);
+  text-align: center;
+  padding: 16px;
+  color: rgb(74, 78, 86);
+}
+
+.user-info {
+  background-color: white;
+  width: 550px;
+  border-radius: 16px;
+  padding: 16px;
+  margin-left: 8px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  margin-bottom: 12px;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-width: 0px;
+  border-color: white;
+  border-radius: 24px;
+  font-size: 16px;
+  color: white;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 152px;
+}
+
+input::-webkit-input-placeholder {
+color: rgba(255, 255, 255, 0.5) !important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: rgba(255, 255, 255, 0.5) !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: rgba(255, 255, 255, 0.5) !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: rgba(255, 255, 255, 0.5) !important;  
+}
