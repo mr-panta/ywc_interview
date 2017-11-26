@@ -3,6 +3,7 @@ import graph from 'fb-react-sdk';
 import FacebookLogin from 'react-facebook-login';
 import Tab from './Tab.js';
 import UserList from './UserList.js';
+import ContactUs from './ContactUs.js';
 import './App.css';
 
 export default class App extends Component {
@@ -35,6 +36,7 @@ export default class App extends Component {
       facebookAuth: false,
       filteredUsers: [],
       popupType: 0,
+      contactUs: false,
     };
 
     document.body.style.overflow = 'hidden';
@@ -297,14 +299,16 @@ export default class App extends Component {
     return (
       <div> 
         { this.state.showPopup && this.renderPopup() }
+        { this.state.contactUs && <ContactUs onClick={ () => { this.toggleContactUs() } } /> }
         <div className="container" >
           <div className="menu-container" >
             <div className="menu" >
               <Tab onClick={ () => { this.changeTab('main') } } active={ this.state.activeTab === 'main' } icon={ require('./image/logo.png') } width={ 150 } height={ 56 } center={ true } />
-              <Tab onClick={ () => { this.changeTab('content') } } active={ this.state.activeTab === 'content' } text={ 'CONTENT' } icon={ require('./image/content.png') }  width={ 64 } height={ 64 }  />
-              <Tab onClick={ () => { this.changeTab('design') } } active={ this.state.activeTab === 'design' } text={ 'DESIGN' } icon={ require('./image/design.png') }  width={ 64 } height={ 64 }  />
-              <Tab onClick={ () => { this.changeTab('marketing') } } active={ this.state.activeTab === 'marketing' } text={ 'MARKETING' } icon={ require('./image/marketing.png') }  width={ 64 } height={ 64 }  />
-              <Tab onClick={ () => { this.changeTab('programming') } } active={ this.state.activeTab === 'programming' } text={ 'PROGRAMMING' } icon={ require('./image/programming.png') }  width={ 64 } height={ 64 }  />
+              <Tab onClick={ () => { this.changeTab('content') } } active={ this.state.activeTab === 'content' } text={ 'CONTENT' } icon={ require('./image/content.png') }  width={ 64 } height={ 64 } />
+              <Tab onClick={ () => { this.changeTab('design') } } active={ this.state.activeTab === 'design' } text={ 'DESIGN' } icon={ require('./image/design.png') }  width={ 64 } height={ 64 } />
+              <Tab onClick={ () => { this.changeTab('marketing') } } active={ this.state.activeTab === 'marketing' } text={ 'MARKETING' } icon={ require('./image/marketing.png') }  width={ 64 } height={ 64 } />
+              <Tab onClick={ () => { this.changeTab('programming') } } active={ this.state.activeTab === 'programming' } text={ 'PROGRAMMING' } icon={ require('./image/programming.png') }  width={ 64 } height={ 64 } />
+              <Tab onClick={ () => { this.toggleContactUs() } } text={ 'CONTACT US' } width={ 64 } height={ 64 } center={ true } />
             </div>
           </div>
           <div className="content" >
@@ -404,4 +408,13 @@ export default class App extends Component {
 
     return '';
   } 
+
+  toggleContactUs() {
+    this.setState({
+      contactUs: !this.state.contactUs,
+    });
+
+    if(!this.state.contactUs) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'auto';
+  }
 }
