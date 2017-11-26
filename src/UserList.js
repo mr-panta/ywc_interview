@@ -9,8 +9,9 @@ export default class UserList extends Component {
         <div className="content-header" >
           <div className="content-title" >{ this.props.title } - { this.props.users.length } คน</div>
           <input type="text" placeholder="ค้นหา" value={ this.props.keyword } onChange={ this.props.onChange } />
-          <div className="button" >
-            <i className="fa fa-facebook" style={{ marginTop: 16, fontSize: 20 }} />
+          <div className="button" onClick={ this.props.onClickFacebook } >
+            { this.props.picture && <img alt="" src={ this.props.picture.url }  style={{ width: 50, height: 50, borderRadius: 25 }} /> }
+            { !this.props.picture && <i className="fa fa-facebook" style={{ marginTop: 16, fontSize: 20 }} /> }
           </div>
         </div>
         <hr />

@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 
 export default class Tab extends Component {
 
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
 
     let className;
@@ -24,7 +19,7 @@ export default class Tab extends Component {
         });
       }} >
         <div className={ className } style={ this.props.center ? { justifyContent: 'center' } : null } >
-            <img src={ this.props.icon } style={{ width: this.props.width, height: this.props.height, margin: 8 }} />
+            <img alt="" src={ this.props.icon } style={{ width: this.props.width, height: this.props.height, margin: 8 }} />
             <div className="tab-text" >{ this.props.text }</div>
         </div>
       </div>

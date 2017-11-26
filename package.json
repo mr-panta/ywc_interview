@@ -5,8 +5,10 @@
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-facebook-login": "^3.7.2",
     "react-icons": "^2.2.7",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-scrolllock": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",
